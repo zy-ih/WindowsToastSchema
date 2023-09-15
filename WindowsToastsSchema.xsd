@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="WindowsToastsSchema"
+    targetNamespace="http://tempuri.org/WindowsToastsSchema.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/WindowsToastsSchema.xsd"
+    xmlns:mstns="http://tempuri.org/WindowsToastsSchema.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+
+  <xs:complexType name="audioType">
+    <xs:attribute name="src">
+      <xs:simpleType>
+        <xs:union>
+          <xs:simpleType>
+            <xs:restriction base="xs:anyURI">
+              <xs:pattern value="ms-appx:///.*\.(aac|flac|m4a|mp3|wav|wma)"/>
+              <xs:pattern value="ms-resource:///.*\.(aac|flac|m4a|mp3|wav|wma)"/>
+              <xs:pattern value="ms-winsoundevent:.*\.(aac|flac|m4a|mp3|wav|wma)"/>
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="ms-winsoundevent:Notification.Default"/>
+              <xs:enumeration value="ms-winsoundevent:Notification.IM"/>
+              <xs:enumeration value="ms-winsoundevent:Notification.Mail"/>
+              <xs:enumeration value="ms-winsoundevent:Notification.Reminder"/>
+              <xs:enumeration value="ms-winsoundevent:Notification.SMS"/>
+              <xs:enumeration value="ms-winsoundevent:Notification.Looping.Alarm"/>
+              <xs:enumeration value="ms-winsoundevent:Notification.Looping.Alarm2"/>
+              <xs:enumeration value="ms-winsoundevent:Notification.Looping.Alarm3"/>
+              <xs:enumeration value="ms-winsoundevent:Notification.Looping.Alarm4"/>
+              <xs:enumeration value="ms-winsoundevent:Notification.Looping.Alarm5"/>
+              <xs:enumeration value="ms-winsoundevent:Notification.Looping.Alarm6"/>
+              <xs:enumeration value="ms-winsoundevent:Notification.Looping.Alarm7"/>
+              <xs:enumeration value="ms-winsoundevent:Notification.Looping.Alarm8"/>
+              <xs:enumeration value="ms-winsoundevent:Notification.Looping.Alarm9"/>
+              <xs:enumeration value="ms-winsoundevent:Notification.Looping.Alarm10"/>
+              <xs:enumeration value="ms-winsoundevent:Notification.Looping.Call"/>
+              <xs:enumeration value="ms-winsoundevent:Notification.Looping.Call2"/>
+              <xs:enumeration value="ms-winsoundevent:Notification.Looping.Call3"/>
+              <xs:enumeration value="ms-winsoundevent:Notification.Looping.Call4"/>
+              <xs:enumeration value="ms-winsoundevent:Notification.Looping.Call5"/>
+              <xs:enumeration value="ms-winsoundevent:Notification.Looping.Call6"/>
+              <xs:enumeration value="ms-winsoundevent:Notification.Looping.Call7"/>
+              <xs:enumeration value="ms-winsoundevent:Notification.Looping.Call8"/>
+              <xs:enumeration value="ms-winsoundevent:Notification.Looping.Call9"/>
+              <xs:enumeration value="ms-winsoundevent:Notification.Looping.Call10"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="loop" type="xs:boolean" default="false"/>
+    <xs:attribute name="silent" type="xs:boolean" default="false"/>
+  </xs:complexType>
+
+  <xs:complexType name="textType">
+    <xs:attribute name="id" type="xs:unsignedInt" use="required"/>
+    <xs:attribute name="lang" type="xs:language"/>
+    <xs:attribute name="placement" type="xs:string" fixed="attribution"/>
+    <xs:attribute name="hint-callScenarioCenterAlign" type="xs:boolean"/>
+  </xs:complexType>
+
+  <xs:complexType name="imageType">
+    <xs:attribute name="id" type="xs:unsignedInt" use="required"/>
+    <xs:attribute name="src" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:anyURI">
+          <xs:pattern value="https?://*."/>
+          <xs:pattern value="ms-appx:///*."/>
+          <xs:pattern value="ms-appdata:///local/*."/>
+          <xs:pattern value="file:///*."/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="placement">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="appLogoOverride"/>
+          <xs:enumeration value="hero"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="alt" type="xs:string"/>
+    <xs:attribute name="addImageQuery" type="xs:boolean" default="false"/>
+    <xs:attribute name="hint-crop" type="xs:string" fixed="circle"/>
+  </xs:complexType>
+
+  <xs:complexType name="commandType">
+    <xs:attribute name="id">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="snooze"/>
+          <xs:enumeration value="dismiss"/>
+          <xs:enumeration value="video"/>
+          <xs:enumeration value="voice"/>
+          <xs:enumeration value="decline"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="arguments" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="actionType">
+    <xs:attribute name="content" type="xs:string" use="required"/>
+    <xs:attribute name="arguments" type="xs:string" use="required"/>
+    <xs:attribute name="activationType" default="foreground">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="foreground"/>
+          <xs:enumeration value="background"/>
+          <xs:enumeration value="protocol"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="placement" type="xs:string" fixed="contextMenu"/>
+    <xs:attribute name="imageUri">
+      <xs:simpleType>
+        <xs:restriction base="xs:anyURI">
+          <xs:pattern value="https?://*."/>
+          <xs:pattern value="ms-appx:///*."/>
+          <xs:pattern value="ms-appdata:///local/*."/>
+          <xs:pattern value="file:///*."/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="hint-inputId" type="xs:string"/>
+    <xs:attribute name="hint-buttonStyle">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Success"/>
+          <xs:enumeration value="Critical"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="hint-toolTip" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="headerType">
+    <xs:attribute name="id" type="xs:string" use="required"/>
+    <xs:attribute name="title" type="xs:string" use="required"/>
+    <xs:attribute name="arguments" type="xs:string" use="required"/>
+    <xs:attribute name="activationType" default="foreground">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="foreground"/>
+          <xs:enumeration value="protocol"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="progressType">
+    <xs:attribute name="title" type="xs:string"/>
+    <xs:attribute name="status" type="xs:string" use="required"/>
+    <xs:attribute name="value" default="0">
+      <xs:simpleType>
+        <xs:union>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="indeterminate"/>
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:double">
+              <xs:minInclusive value="0.0"/>
+              <xs:maxInclusive value="1.0"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="valueStringOverride" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="selectionType">
+    <xs:attribute name="id" type="xs:string" use="required"/>
+    <xs:attribute name="content" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="commandsType">
+    <xs:sequence>
+      <xs:element name="command" type="commandType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="scenario">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="alarm"/>
+          <xs:enumeration value="incomingCall"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="inputType">
+    <xs:sequence minOccurs="0" maxOccurs="5">
+      <xs:element name="selection" type="selectionType"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+    <xs:attribute name="type">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="text"/>
+          <xs:enumeration value="selection"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="placeHolderContent" type="xs:string"/>
+    <xs:attribute name="title" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="actionsType" mixed="true">
+    <xs:sequence>
+      <xs:element name="input" type="inputType" minOccurs="0" maxOccurs="5"/>
+      <xs:element name="action" type="actionType" minOccurs="0" maxOccurs="5"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="subgroupType">
+    <xs:sequence>
+      <xs:element name="text" type="textType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="image" type="imageType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="groupType">
+    <xs:sequence>
+      <xs:element name="subgroup" type="subgroupType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="bindingType">
+    <xs:sequence>
+      <xs:element name="text" type="textType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="image" type="imageType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="progress" type="progressType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="group" type="groupType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="template" type="xs:string" fixed="ToastGeneric" use="required"/>
+    <xs:attribute name="fallback" type="xs:string"/>
+    <xs:attribute name="lang" type="xs:language"/>
+    <xs:attribute name="baseUri" default="ms-appx:///">
+      <xs:simpleType>
+        <xs:restriction base="xs:anyURI">
+          <xs:pattern value="https?://*."/>
+          <xs:pattern value="ms-appx:///*."/>
+          <xs:pattern value="ms-appdata:///local/*."/>
+          <xs:pattern value="file:///*."/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="branding">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="none"/>
+          <xs:enumeration value="logo"/>
+          <xs:enumeration value="name"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="addImageQuery" type="xs:boolean" default="false"/>
+  </xs:complexType>
+
+  <xs:complexType name="visualType">
+    <xs:sequence>
+      <xs:element name="binding" type="bindingType" minOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="version" type="xs:integer"/>
+    <xs:attribute name="lang" type="xs:language"/>
+    <xs:attribute name="baseUri" default="ms-appx:///">
+      <xs:simpleType>
+        <xs:restriction base="xs:anyURI">
+          <xs:pattern value="https?://*."/>
+          <xs:pattern value="ms-appx:///*."/>
+          <xs:pattern value="ms-appdata:///local/*."/>
+          <xs:pattern value="file:///*."/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="branding">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="none"/>
+          <xs:enumeration value="logo"/>
+          <xs:enumeration value="name"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="addImageQuery" type="xs:boolean" default="false"/>
+  </xs:complexType>
+
+  <xs:complexType name="toastType">
+    <xs:all>
+      <xs:element name="visual" type="visualType"/>
+      <xs:element name="audio" type="audioType" minOccurs="0"/>
+      <xs:element name="commands" type="commandsType" minOccurs="0"/>
+      <xs:element name="actions" type="actionsType" minOccurs="0"/>
+      <xs:element name="header" type="headerType" minOccurs="0"/>
+    </xs:all>
+    <xs:attribute name="duration">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="long"/>
+          <xs:enumeration value="short"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="launch" type="xs:string"/>
+    <xs:attribute name="displayTimestamp" type="xs:dateTime"/>
+    <xs:attribute name="scenario">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="reminder"/>
+          <xs:enumeration value="alarm"/>
+          <xs:enumeration value="incomingCall"/>
+          <xs:enumeration value="urgent"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="useButtonStyle" type="xs:boolean" default="false"/>
+  </xs:complexType>
+
+  <xs:element name="toast" type="toastType"/>
+</xs:schema>
